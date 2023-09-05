@@ -1,0 +1,30 @@
+{
+  "name": "@polesapart/reflexjs",
+  "version": "0.10.0",
+  "description": "A reflexjs compatibility package",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "ts-jest"
+  },
+  "keywords": [],
+  "author": "Alexandre P Nunes <alexandre.nunes@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polesapart/reflexjs-compat"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.22.15",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2"
+  }
+}
