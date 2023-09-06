@@ -1,6 +1,6 @@
 {
   "name": "@polesapart/reflexjs",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A reflexjs compatibility package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
