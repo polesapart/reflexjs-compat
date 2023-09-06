@@ -6,7 +6,8 @@
     "allowJs": true,
     "checkJs": true,
     "resolveJsonModule": true,
-    "incremental": true
+    "incremental": true,
+    "outDir": "dist"
   },
   "exclude": [
     "node_modules",
