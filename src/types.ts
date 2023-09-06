@@ -15,6 +15,8 @@ import {} from "@theme-ui/css";
 export interface CssProps extends StandardLonghandProperties, StandardShorthandProperties {
 }
 
+export type StringIndexedObject = {[x: string]: any}
+
 export interface AliasProps {
     /**
      * **`bg`** is a shorthand property for the **`backgroundColor`** CSS property.
@@ -174,6 +176,7 @@ export type SxProps = Omit<StyleProps, "sx"> | {
 };
 
 export interface StyleProps extends ResponsiveBoxProps {
+    [key: string]: any
     as?: keyof JSX.IntrinsicElements;
     variant?: string;
     sx?: SxProps;

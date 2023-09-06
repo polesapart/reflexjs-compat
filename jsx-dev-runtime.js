@@ -1,1 +1,1 @@
-module.exports = require("./dist/jsx-dev-runtime")
+module.exports = require('./dist/jsx-dev-runtime')

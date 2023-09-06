@@ -4,8 +4,9 @@
 import * as React from "react";
 import deepmerge from "deepmerge";
 import { css, jsx as themeUIJSX, ThemeUIContextValue, ThemeUIStyleObject, useThemeUI } from "theme-ui";
-import styleProps from "./style-props";
-import { StyleProps, SxProps, Theme } from "./types";
+import styleProps from "./style-props.js";
+import { StyleProps, SxProps, Theme, StringIndexedObject } from "./types.js";
+
 
 export { useColorMode, css, get, InitializeColorMode } from "theme-ui";
 
@@ -21,10 +22,12 @@ const RESPONSIVE_SEPARATOR = "|";
 
 const regex = new RegExp(`^(${Object.keys(styleProps).join("|")})$`);
 
+
+
 const omit = (props: {
     [x: string]: any;
 }) => {
-    const next = {};
+    const next: StringIndexedObject = {};
     for (const key in props) {
         if (regex.test(key))
             continue;
@@ -36,7 +39,7 @@ const omit = (props: {
 const pick = (props: {
     [x: string]: any;
 }) => {
-    const next = {};
+    const next : StringIndexedObject = {};
     for (const key in props) {
         if (!regex.test(key))
             continue;
@@ -61,7 +64,7 @@ export const makeResponsive = (prop: string) => {
     });
 };
 
-export function transformProps(props: StyleProps, result = {}): ThemeUIStyleObject {
+export function transformProps(props: StyleProps, result: StringIndexedObject = {}): ThemeUIStyleObject {
     if (props !== null && typeof props === "object") {
         Object.entries(props).forEach(([key, value]) => {
             if (!Array.isArray(value) && typeof value === "object") {
@@ -103,7 +106,7 @@ export function parseProps<P>(type: React.ElementType<P> | Object, props: any) {
     }
 
     if (typeof type !== "string") {
-        return props.sx
+        return props["sx"]
             ? {
                 ...props,
                 sx: transformProps(props.sx),
@@ -112,7 +115,7 @@ export function parseProps<P>(type: React.ElementType<P> | Object, props: any) {
     }
 
     const { sx: _sx = {}, ...__props } = props;
-    let { variant, ..._props } = __props;
+    let { variant, ..._props }: Omit<any, "sx"> = __props;
     const { variant: sxVariant, ...sx } = _sx;
     if (sxVariant) {
         variant = sxVariant;
@@ -141,12 +144,13 @@ export function parseProps<P>(type: React.ElementType<P> | Object, props: any) {
     }
 
     next.css = (theme: ({
-        theme: Theme;
+        theme: Theme
+        [key: string]: any
     } | Theme)) => {
         const variants = variant.split(" ");
         let __themeKeyFailed = false;
         let variantStyles = {};
-        variants.forEach((variant) => {
+        variants.forEach((variant: string) => {
             const [__themeKey, ...nestedVariants] = variant.split(".");
             if (!theme[__themeKey]) {
                 __themeKeyFailed = true;
